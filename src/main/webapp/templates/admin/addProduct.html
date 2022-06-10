@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+    <link th:href="@{/css/styles.css}" th:rel="stylesheet" />
+</head>
+<body>
+<nav th:insert="fragments.html :: navbar"></nav>
+
+<form role="form" th:action="@{/admin/addProduct}" th:method="post" th:object="${product}" class="ff2">
+    <lable>Название</lable>
+    <input type="text" id="name" name="name" placeholder="Название" th:field="*{name}">
+
+    <lable>Цена</lable>
+    <input type="number" id="price" name="price" placeholder="Цена" th:field="*{price}">
+
+    <lable>Ссылка на фото</lable>
+    <input type="text" id="imagePath" name="imagePath" placeholder="Ссылка на фото" th:field="*{imagePath}">
+
+    <label>Жанр</label>
+    <select th:field="*{category}">
+        <option th:value="Фантастика" th:text="Фантастика"></option>
+        <option th:value="Роман" th:text="Роман"></option>
+        <option th:value="Детектив" th:text="Детектив"></option>
+    </select>
+
+    <input type="submit" value="Добавить">
+</form>
+<p th:if="${success}">Successfully added a product</p>
+<script th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}"></script>
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/scripts.js}"></script>
+
+</body>
+</html>

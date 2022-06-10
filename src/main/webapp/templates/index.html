@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Книжный</title>
+    <link th:href="@{/css/styles.css}" th:rel="stylesheet" />
+</head>
+<body>
+    <h1>Книжный магазин</h1>
+    <a th:href="@{~/registration}"><b>Регистрация</b></a>
+    <a th:href="@{~/products}">Каталог</a>
+    <a th:href="@{~/login}">Вход</a>
+    <p sec:authorize="hasRole('ROLE_ADMIN')">
+        <a th:href="@{~/admin/deleteUser}"><b>Удалить пользователей</b></a>
+        <a th:href="@{~/admin/addProduct}">Добавить книги</a>
+    </p>
+</body>
+</html>

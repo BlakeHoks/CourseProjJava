@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Registration</title>
+    <link th:href="@{/css/styles.css}" th:rel="stylesheet" />
+</head>
+<body>
+<nav th:insert="fragments.html::navbar"></nav>
+<div class="container ff2">
+    <div class="row">
+        <div class="col">
+            <form role="form" th:action="@{/registration}" th:method="post" th:object="${user}">
+                <lable>Логин</lable>
+                <input type="text" id="name" name="name" class="form-inline" placeholder="Логин" th:field="*{username}">
+
+                <lable>Email</lable>
+                <input type="text" id="email" name="email" class="form-inline" placeholder="email" th:field="*{email}">
+
+                <lable>Пароль</lable>
+                <input type="password" id="password" class="form-inline" name="password" placeholder="Пароль" th:field="*{password}">
+
+                <input type="submit" value="Зарегистрироваться" class="btn-outline-secondary ff2">
+            </form>
+        </div>
+    </div>
+</div>
+<script th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}"></script>
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/scripts.js}"></script>
+
+</body>
+</html>

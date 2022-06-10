@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link th:href="@{/css/styles.css}" th:rel="stylesheet" />
+</head>
+<body>
+<nav th:insert="fragments.html :: navbar"></nav>
+
+<form role="form" th:action="@{/products/categorized}" th:method="post" class="ff1">
+    <h4>Отсортировать книги по жанру</h4>
+    <select id="category" name="category">
+        <option disabled selected value> -- выберите жанр -- </option>
+        <option th:value="All" th:text="Все"></option>
+        <option th:value="Фантастика" th:text="Фантастика"></option>
+        <option th:value="Роман" th:text="Роман"></option>
+        <option th:value="Детектив" th:text="Детектив"></option>
+    </select>
+    <input type="submit" value="Отсортировать" class="btn-outline-success"/>
+</form>
+<div class="container ff2">
+    <div class="row">
+        <div th:each="product : ${products}" class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" th:src="${product.imagePath}" alt="..." /></a>
+                <div class="card-body">
+                    <h4 class="card-title" th:text="${product.name}"></h4>
+                    <h5 th:text="${product.price}"></h5>
+                </div>
+                <div class="card-footer">
+                    <form sec:authorize="hasRole('ROLE_USER')" th:action="@{|/user/addToCart/${product.productId}|}" th:method="get">
+                        <input type="submit" value="Добавить в корзину"/>
+                    </form>
+                    <form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{|/admin/deleteProduct/${product.productId}|}" th:method="get">
+                        <input type="submit" value="Удалить"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{https://code.jquery.com/jquery-3.5.1.slim.min.js}"></script>
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/scripts.js}"></script>
+</body>
+</html>
